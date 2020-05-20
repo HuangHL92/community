@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hhu.springboot_community.mapper.QuestionMapper" >
+
+    <insert id="insertQuestion" parameterType="com.hhu.springboot_community.dao.Question" >
+        insert into question (id,title,description,gmt_creat,gmt_modified,creator
+        ,tag) values (#{id},#{title},#{description},#{gmtCreat},#{gmtModified},#{creator}
+        ,#{tag});
+    </insert>
+
+</mapper>

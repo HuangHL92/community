@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hhu.springboot_community.mapper.UserMapper" >
+
+    <insert id="insertUser" parameterType="com.hhu.springboot_community.dao.User" >
+        insert into user (id,user_name,bio,avatar_url,token,gmt_create,gmt_modified,account_id) values (#{id},#{userName},#{bio},#{avatarUrl},#{token},#{gmtCreate},#{gmtModified},#{accountId});
+    </insert>
+
+    <select id="getUserByToken" parameterType="java.lang.String" resultType="com.hhu.springboot_community.dao.User">
+        select * from user t where t.token=#{token}
+    </select>
+    <select id="getUserByName" parameterType="java.lang.String" resultType="com.hhu.springboot_community.dao.User">
+        select * from user t where t.user_name=#{userName}
+    </select>
+</mapper>

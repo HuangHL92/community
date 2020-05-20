@@ -1,5 +1,7 @@
 package com.hhu.springboot_community.dao;
 
+import java.util.UUID;
+
 /**
  * @description:
  * @author: huanghl
@@ -12,7 +14,7 @@ public class UserDao {
     private String login;
     private String id;
     private String bio;
-    private String avatarUrl;
+    private String avatar_url;
 
     public String getLogin() {
         return login;
@@ -38,12 +40,12 @@ public class UserDao {
         this.bio = bio;
     }
 
-    public String getAvatarUrl() {
-        return avatarUrl;
+    public String getAvatar_url() {
+        return avatar_url;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    public void setAvatar_url(String avatar_url) {
+        this.avatar_url = avatar_url;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class UserDao {
                 "login='" + login + '\'' +
                 ", id='" + id + '\'' +
                 ", bio='" + bio + '\'' +
-                ", avatarUrl='" + avatarUrl + '\'' +
+                ", avatar_url='" + avatar_url + '\'' +
                 '}';
     }
 
