@@ -56,16 +56,20 @@ public class PublishController {
                 break;
             }
         }
-        if (user == null) {
-            model.addAttribute("error", "请先登录");
-        }
-        Question question1 = new Question();
-        question1.setTitle(question.getTitle());
-        question1.setDescription(question.getDescription());
-        question1.setTag(question.getTag());
-        question1.setGmtCreat(System.currentTimeMillis());
-        question1.setGmtModified(question1.getGmtCreat());
-        questionMapper.insertQuestion(question1);
-        return "publish";
+            if (user == null) {
+                model.addAttribute("error", "请先登录");
+                return "publish";
+            }
+            Question question1 = new Question();
+            question1.setTitle(question.getTitle());
+            question1.setDescription(question.getDescription());
+            question1.setTag(question.getTag());
+            question1.setGmtCreat(System.currentTimeMillis());
+            question1.setGmtModified(question1.getGmtCreat());
+            question1.setCreator(user.getId());
+            questionMapper.insertQuestion(question1);
+
+        return "redirect:/";
     }
 }
+

@@ -17,4 +17,6 @@ public interface UserMapper {
     public User getUserByToken(String token);
 
     public User getUserByName(String userName);
+
+    public  User getUser(Integer id);
 }

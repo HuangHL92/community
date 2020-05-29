@@ -12,4 +12,7 @@
     <select id="getUserByName" parameterType="java.lang.String" resultType="com.hhu.springboot_community.dao.User">
         select * from user t where t.user_name=#{userName}
     </select>
+    <select id="getUser" parameterType="java.lang.Integer" resultType="com.hhu.springboot_community.dao.User">
+        select * from user t where t.id=#{id};
+    </select>
 </mapper>

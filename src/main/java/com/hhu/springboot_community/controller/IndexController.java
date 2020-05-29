@@ -1,19 +1,23 @@
 package com.hhu.springboot_community.controller;
-import com.hhu.springboot_community.dao.AccessTokenDao;
-import com.hhu.springboot_community.dao.User;
-import com.hhu.springboot_community.dao.UserDao;
+import com.hhu.springboot_community.dao.*;
+import com.hhu.springboot_community.mapper.QuestionMapper;
 import com.hhu.springboot_community.mapper.UserMapper;
+import com.hhu.springboot_community.service.QuestionService;
 import com.hhu.springboot_community.util.HttpClientUntil;
 import com.hhu.springboot_community.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -32,19 +36,29 @@ public class IndexController {
     String redirect_uri;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private QuestionMapper questionMapper;
+    @Autowired
+    private QuestionService questionService;
 
     @RequestMapping("/")
-    public String index(HttpServletRequest request) {
+    public String index(HttpServletRequest request, Model model) {
+        List<QuestionDto> questionDtos = new ArrayList<QuestionDto>();
+        User user = null;
         Cookie[] cookies = request.getCookies();
         for(int i=0;i<cookies.length;i++){
             if(cookies[i].getName().equals("token")){
                 String token = cookies[i].getValue();
-                User user = userMapper.getUserByToken(token);
+                user = userMapper.getUserByToken(token);
                 request.getSession().setAttribute("user",user);
                 break;
             }
         }
 
+        questionDtos = questionService.getQuestion();
+        if(!StringUtils.isEmpty(questionDtos)){
+            model.addAttribute("results",questionDtos);
+        }
         return "index";
     }
 

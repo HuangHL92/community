@@ -5,6 +5,7 @@
     <title>community</title>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/community.css"/>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>
@@ -12,7 +13,7 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">黄氏社区</a>
+            <a class="navbar-brand" href="/">黄氏社区</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -24,9 +25,7 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><span class="glyphicon glyphicon-plus" aria-hidden="true">
-                    <a href="/publish">发布</a>
-                </span></li>
+                <li><a href="/publish">发布</a></li>
                 <li th:if="${session.user==null}"><a href="https://github.com/login/oauth/authorize?client_id=2382feae23bc6c1d9db9&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a></li>
                 <li class="dropdown" th:if="${session.user!=null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getUserName()}" ><span class="caret"></span></a>
@@ -40,5 +39,30 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发现</h2>
+            <hr/>
+            <div class="media"th:each="result,gwstate:${results}" >
+                <div class="media-left" th:if="${result!=null}">
+                    <a href="#">
+                        <img class="media-object" th:src="@{https://avatars3.githubusercontent.com/u/53590078(v=4)}" alt="文件找不到">
+                    </a>
+                </div>
+                <div class="media-body" th:if="${result!=null}">
+                    <h4 class="media-heading" th:text="${result.title}"></h4>
+                    [[${result.description}]]
+                    <br/>
+                    <span class="text-color-999 text-desc">[[${result.likeCount}]] 个喜欢 • [[${result.commentCount}]] 个回复 • [[${result.viewCount}]] 次浏览 • [[${#dates.format(result.gmtCreat,'yyyy-MM-dd hh:mm:ss')}]]</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>问题发起指南</h3>
+            .问题标题：请用简洁的语言叙述，不超过25个字
+        </div>
+    </div>
+</div>
 </body>
 </html>

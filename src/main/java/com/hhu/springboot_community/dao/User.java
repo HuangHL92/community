@@ -3,7 +3,7 @@ package com.hhu.springboot_community.dao;
 
 public class User {
 
-  private long id;
+  private Integer id;
   private String userName;
   private String bio;
   private String avatarUrl;
@@ -12,15 +12,13 @@ public class User {
   private long gmtModified;
   private String accountId;
 
-
-  public long getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Integer id) {
     this.id = id;
   }
-
 
   public String getUserName() {
     return userName;
